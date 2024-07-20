@@ -32,7 +32,7 @@ const allIcons= {
     "13n": snow_icon,
 }
 
-const apiKey = "PUT YOUR API KEY HERE!!!";
+const apiKey = "7efeeb1a75d538cf6eb7f9d6dd8766a0";
 const search = async (city) => {
     if(city==""){
         alert("Enter city name!!!");
