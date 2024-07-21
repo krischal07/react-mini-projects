@@ -16,8 +16,8 @@ export default function TodoList() {
 
     function handleDelete(index){
         const newTodos = [...todos];
-        console.log("index"+index);
-        console.log(index);
+        // console.log("index"+index);
+        // console.log(index);
         newTodos.splice(index,1);
         setTodos(newTodos);
     }
