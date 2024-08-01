@@ -78,9 +78,9 @@ ul li{
 
 
 .dark .search-box input{
-    color: #222;
+    color: black;
 }
 
 .dark .search-box input ::placeholder{
-    background: black;
+    color: black;
 }
