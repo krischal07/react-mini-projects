@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navbar } from './components/Navbar'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -6,6 +6,18 @@ import { v4 as uuidv4 } from 'uuid';
 export default function App() {
   const [todo,setTodo] = useState("");//input text
   const [todos, setTodos] = useState([]); //Holds all the arrays of todos
+
+useEffect(() =>{
+  let todoString = localStorage.getItem("todos");
+  if(todoString){
+    let todos = JSON.parse(localStorage.getItem("todos"));
+    setTodos(todos);
+  }
+},[])
+
+  const saveToLs = (params) => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }
 
   const handleChange = (e) =>{
     setTodo(e.target.value);
@@ -22,11 +34,18 @@ export default function App() {
       // console.log(todos);
       
       setTodos(newTodos);
+    saveToLs();
+
    }
 
   const handleEdit = (e,id) =>{
     let t = todos.filter(i => i.id === id)
     setTodo(t[0].todo);
+    let newTodos = todos.filter(item =>{
+      return item.id!==id
+    });
+    setTodos(newTodos);
+    saveToLs();
   }
 
   const handleDelete = (e, id) =>{
@@ -35,12 +54,15 @@ export default function App() {
         return item.id!==id
       });
       setTodos(newTodos);
+    saveToLs();
      
   }
 
   const handleAdd = () =>{
     setTodos([...todos, {id:uuidv4(),todo, isCompleted:false}]);
     setTodo("");
+    saveToLs();
+
   }
 
   return (
